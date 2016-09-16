@@ -1,0 +1,12 @@
+{
+  "name": "view-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "3.4.1",
+    "ejs": "*"
+  },
+  "author": "Ryan",
+  "license": "ISC"
+}
