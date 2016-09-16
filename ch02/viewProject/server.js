@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 
-app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 var posts = [
@@ -10,7 +9,7 @@ var posts = [
 ];
 
 app.get('/posts', function(req, res) {
-  res.render('./views/posts', {posts:posts});
+  res.render('posts', {posts:posts});
 });
 
 app.listen(8080);
