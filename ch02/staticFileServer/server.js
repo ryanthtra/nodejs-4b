@@ -6,6 +6,8 @@ var mime = require('mime');
 
 var server = http.createServer();
 
+var cache = {};
+
 function genericSend(code, message, response) 
 {
   response.writeHead(code, {'Content-Type':'text/plain'});
@@ -23,24 +25,38 @@ server.on('request', function(req, res) {
   // path.exists(filename, 'binary', function(exists) {
 
   // });
-  fs.access(filename, function(err) {
-    console.log(err ? 'No acess!' : 'Can read/write');
-    if (err) {
-      // 404
-      return genericSend(404, 'not found', res);
-    }
-    fs.readFile(filename, 'binary', function(error, file) {
-      if (error) {
-        // 500
-        return genericSend(500, 'internal server error', res);
-      }
 
-      var type = mime.lookup(filename);
-      res.writeHead(200, {'Content-Type':type});
-      res.write(file, 'binary');
-      res.end();
+  // Check if the file is not already in the cache 
+  if (!cache[filename]) {
+    fs.access(filename, function(err) {
+      console.log(err ? 'No acess!' : 'Can read/write');
+      if (err) {
+        // 404
+        return genericSend(404, 'not found', res);
+      }
+      fs.readFile(filename, 'binary', function(error, file) {
+        if (error) {
+          // 500
+          return genericSend(500, 'internal server error', res);
+        }
+
+        // Record to cache first 
+        cache[filename] = file;
+
+        var type = mime.lookup(filename);
+        res.writeHead(200, {'Content-Type':type});
+        res.write(file, 'binary');
+        res.end();
+      });
     });
-  });
+  }
+  else {
+    console.log("File is in the cache!");
+    var type = mime.lookup(filename);
+    res.writeHead(200, {'Content-Type':type});
+    res.write(cache[filename], 'binary');
+    res.end();
+  }
 });
 
 server.listen(9000);
