@@ -5,10 +5,10 @@
       "name": "Launch",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/ch02/expressProject/server.js",
+      "program": "${workspaceRoot}/ch02/random-quote/server.js",
       "stopOnEntry": false,
       "args": [],
-      "cwd": "${workspaceRoot}/ch02/expressProject/",
+      "cwd": "${workspaceRoot}/ch02/random-quote/",
       "preLaunchTask": null,
       "runtimeExecutable": null,
       "runtimeArgs": [
