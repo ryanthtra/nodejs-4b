@@ -5,10 +5,10 @@
       "name": "Launch",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/ch02/staticFileServer/server.js",
+      "program": "${workspaceRoot}/ch02/expressProject/server.js",
       "stopOnEntry": false,
       "args": [],
-      "cwd": "${workspaceRoot}/ch02/staticFileServer/",
+      "cwd": "${workspaceRoot}/ch02/expressProject/",
       "preLaunchTask": null,
       "runtimeExecutable": null,
       "runtimeArgs": [
